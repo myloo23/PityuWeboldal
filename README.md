@@ -102,3 +102,11 @@ Generálási prompt:
 Minden tétel saját, a kiválasztott színt követő termékfotót, nevet, kategóriát, cikkszámot és szín–darabszám összefoglalót kapott. A legördülő mellett feliratos színminták is használhatók, a részletek linkje megőrzi a színt. A hiányzó fotók és saját termékek külön jelzést kapnak; törlés után a látható tételszámok újraszámozódnak. A színfeliratok a meglévő beszállítói adatokból származnak.
 
 Célzott ellenőrzés: `scripts/check-quote.cjs` (Playwright/Chrome): mind a 70 színváltozat, több tétel független kezelése, saját termék, hiányzó fotó és 320–1440 px nézetek.
+
+## Betöltési sebesség – 2026. október 6.
+
+A build a `fonts.css`, `styles.css` és `responsive.css` fájlokból generálja az `assets/site.css` állományt. Ezeket a forrásokat szerkeszd, majd futtasd újra a buildet. A CSS- és JavaScript-URL-ek tartalomfüggő verziót kapnak. A termékoldalak csak saját adataikat töltik be; a katalógus és az ajánlatkérő a teljes, de csökkentett adattartalmú listát. A beszállítói JSON teljes tartalma változatlanul megmarad. A beágyazott színmintákból a build közösen használható `assets/swatches/` fájlokat készít.
+
+A `dist/` tartalmazza a `.htaccess` fájlt is: ezt a rejtett fájlt is töltsd fel. Apache alatt az elérhető modulokkal bekapcsolja a szöveges fájlok tömörítését és a statikus erőforrások gyorsítótárazását. HTML mindig újraellenőrzendő, CSS/JS tartalomhash alapján frissül; változatlan nevű képek legfeljebb egy napig maradhatnak cache-ben. A helyi Python-előnézet ezeket a szerverbeállításokat nem alkalmazza.
+
+Mérési eredmények és korlátok: `docs/qa/performance.md`. Újramérés: `node scripts/measure-performance.cjs` (Playwright és Chrome szükséges).

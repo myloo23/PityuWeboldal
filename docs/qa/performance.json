@@ -1,0 +1,70 @@
+{
+  "conditions": {
+    "viewport": "390x844",
+    "latencyMs": 150,
+    "downloadBytesPerSecond": 200000,
+    "cache": "disabled",
+    "server": "local Python HTTP, no compression",
+    "runs": 1
+  },
+  "before": [
+    {
+      "path": "index.html",
+      "lcpMs": 2056,
+      "loadMs": 2099,
+      "bytes": 330165,
+      "requests": 20
+    },
+    {
+      "path": "katalogus.html",
+      "lcpMs": 2608,
+      "loadMs": 3106,
+      "bytes": 547052,
+      "requests": 35
+    },
+    {
+      "path": "termekek/classic-new-132.html",
+      "lcpMs": 1132,
+      "loadMs": 1911,
+      "bytes": 338123,
+      "requests": 13
+    },
+    {
+      "path": "ajanlatkeres.html",
+      "lcpMs": 1100,
+      "loadMs": 1785,
+      "bytes": 302090,
+      "requests": 12
+    }
+  ],
+  "after": [
+    {
+      "path": "index.html",
+      "lcpMs": 1160,
+      "loadMs": 1574,
+      "bytes": 289313,
+      "requests": 16
+    },
+    {
+      "path": "katalogus.html",
+      "lcpMs": 1240,
+      "loadMs": 2356,
+      "bytes": 337303,
+      "requests": 40
+    },
+    {
+      "path": "termekek/classic-new-132.html",
+      "lcpMs": 888,
+      "loadMs": 1448,
+      "bytes": 201558,
+      "requests": 16
+    },
+    {
+      "path": "ajanlatkeres.html",
+      "lcpMs": 924,
+      "loadMs": 1231,
+      "bytes": 161469,
+      "requests": 8
+    }
+  ]
+}
