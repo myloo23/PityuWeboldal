@@ -1,12 +1,11 @@
 const {chromium}=require('playwright');const fs=require('fs');const assert=require('node:assert/strict');
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});
+ await page.emulateMedia({reducedMotion:'reduce'});
  const shot=async options=>{await page.locator('img').evaluateAll(es=>es.forEach(e=>e.loading='eager'));await page.waitForFunction(()=>[...document.images].every(e=>e.complete));await page.evaluate(()=>document.fonts.ready);await page.screenshot(options);};
  const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().startsWith('http://127.0.0.1:8080')&&r.status()>=400)errors.push(`${r.status()} ${r.url()}`)});
  const url='http://127.0.0.1:8080/';const products=JSON.parse(fs.readFileSync('assets/data/products.json','utf8'));
  await page.goto(url);await shot({path:'docs/qa/home-desktop.png',fullPage:true});
- await page.locator('[data-hero-color="07"]').click();assert.ok((await page.locator('#hero-garment').getAttribute('src')).includes('-07.webp'));assert.ok((await page.locator('#hero-product-link').getAttribute('href')).includes('szin=07'));
- await page.locator('[data-hero-color="01"]').click();
  await page.locator('.category-row').nth(3).hover();assert.equal(await page.locator('#category-caption').textContent(),'Jacket 501');
  await page.locator('.category-row').nth(5).focus();assert.equal(await page.locator('#category-number').textContent(),'06');
  await page.locator('[data-placement="back"]').click();assert.equal(await page.locator('#placement-view-label').textContent(),'HÁTULNÉZET');assert.equal(await page.locator('[data-placement="back"]').getAttribute('aria-pressed'),'true');
@@ -14,23 +13,32 @@ const {chromium}=require('playwright');const fs=require('fs');const assert=requi
  await page.locator('[data-placement="chest"]').click();
  await page.getByRole('heading',{name:'Hímzés',exact:true}).click();assert.equal(await page.locator('.techniques details').nth(1).getAttribute('open'),'');
 
- for(const width of [1440,768,390,320]){
+ for(const width of [1440,1024,820,768,600,430,390,375,360,320]){
   await page.setViewportSize({width,height:900});
   for(const path of ['index.html','katalogus.html','termekek/classic-new-132.html','termekek/thermoquilt-gilet.html','ajanlatkeres.html','adatkezeles.html']){
    await page.goto(url+path);await page.evaluate(()=>document.fonts.ready);
    await page.locator('img').evaluateAll(es=>es.forEach(e=>e.loading='eager'));
    await page.waitForFunction(()=>[...document.images].every(e=>e.complete));
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`Overflow at ${width}: ${path}`);
-   assert.equal(await page.locator('img').evaluateAll(es=>es.filter(e=>!e.complete||!e.naturalWidth).length),0,`Broken image: ${path}`);
+   assert.equal(await page.locator('img').evaluateAll(es=>es.filter(e=>e.hasAttribute('src')&&(!e.complete||!e.naturalWidth)).length),0,`Broken image: ${path}`);
   }
  }
  await page.setViewportSize({width:390,height:844});await page.goto(url);await shot({path:'docs/qa/home-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'Menü'}).click();assert.equal(await page.locator('#navigation').isVisible(),true);await page.keyboard.press('Escape');assert.equal(await page.locator('#navigation').isVisible(),false);
  await page.goto(url+'katalogus.html');assert.equal(await page.locator('.product-card:visible').count(),15);
+ await page.locator('.filter-toggle').click();
  await page.locator('[data-filter="Női pólók"]').click();assert.equal(await page.locator('.product-card:visible').count(),2);
+ assert.equal(await page.locator('#category-title').textContent(),'Női pólók');
+ const basic=page.locator('[data-product-id="basic-134"]');
+ await basic.locator('[data-color="07"]').click();
+ assert.ok((await basic.locator('img').getAttribute('src')).includes('-07.webp'));
+ assert.ok((await basic.locator('.card-link').getAttribute('href')).includes('szin=07'));
+ await basic.locator('.card-link').click();
+ assert.equal(await page.locator('.swatch[data-color="07"]').getAttribute('aria-pressed'),'true');
+ await page.goBack();
  await page.locator('#search').fill('128');assert.equal(await page.locator('.product-card:visible').count(),1);
  await page.locator('#search').fill('nemletezo');assert.equal(await page.locator('#no-results').isVisible(),true);
- await page.locator('#search').fill('');await page.locator('[data-filter=""]').click();await shot({path:'docs/qa/catalog-mobile.png',fullPage:true});
+ await page.locator('#search').fill('');await page.locator('.filter-toggle').click();await page.locator('[data-filter=""]').click();await shot({path:'docs/qa/catalog-mobile.png',fullPage:true});
  for(const product of products){
   await page.goto(url+`termekek/${product.id}.html`);
   assert.equal(await page.locator('.swatch').count(),product.colors.length);
@@ -60,5 +68,5 @@ const {chromium}=require('playwright');const fs=require('fs');const assert=requi
  await page.locator('.quantity').fill('5');await page.locator('.product-select').selectOption('other');await page.locator('.custom-product').fill('Egyedi bögre');await page.locator('.custom-color').fill('Egyeztetendő');await page.locator('#preview-button').click();assert.ok((await page.locator('#preview-text').inputValue()).includes('Egyedi bögre'));
  assert.equal(await page.locator('input[type="file"]').count(),0);assert.deepEqual(errors,[]);
  await page.setViewportSize({width:1440,height:1000});await page.goto(url+'katalogus.html');await shot({path:'docs/qa/catalog-desktop.png',fullPage:true});await page.goto(url+'termekek/classic-new-132.html');await shot({path:'docs/qa/product-desktop.png',fullPage:true});
- await browser.close();console.log('PASS: 19 pages; 15 products; all requested color variants; 4 viewport widths; filtering, menu, quote transfer, combined minimum, optional fields, summary and no browser errors.');
+ await browser.close();console.log('PASS: 19 pages; 15 products; all requested color variants; 10 viewport widths; filtering, menu, quote transfer, combined minimum, optional fields, summary and no browser errors.');
 })();

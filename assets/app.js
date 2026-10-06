@@ -10,18 +10,11 @@
     $('#navigation').classList.toggle('open', expanded);
   });
   const closeMenu = () => { menu?.setAttribute('aria-expanded', 'false'); $('#navigation')?.classList.remove('open'); };
+  window.matchMedia('(max-width: 800px)').addEventListener('change', closeMenu);
   $$('#navigation a').forEach(a => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu?.getAttribute('aria-expanded') === 'true') { closeMenu(); menu.focus(); } });
 
   if (document.body.dataset.page === 'home') {
-    const colorNames = { '01': 'fekete', '00': 'fehér', '07': 'piros' };
-    $$('[data-hero-color]').forEach(button => button.addEventListener('click', () => {
-      const code = button.dataset.heroColor;
-      $('#hero-garment').src = `assets/products/pique-polo-203-${code}.webp`;
-      $('#hero-garment').alt = `Pique Polo 203 – ${colorNames[code]} galléros póló`;
-      $('#hero-product-link').href = 'termekek/pique-polo-203.html?szin=' + code;
-      $$('[data-hero-color]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-    }));
     $$('.category-row').forEach(row => {
       const showCategory = () => {
         $('#category-preview').src = row.dataset.preview;
@@ -49,6 +42,20 @@
   }
   if (document.body.dataset.page === 'catalog') {
     const links = $$('[data-filter]');
+    const filterToggle = $('.filter-toggle');
+    const filterNav = $('#category-filters');
+    const compactFilters = window.matchMedia('(max-width: 600px)');
+    function setFilterOpen(open) {
+      filterToggle.setAttribute('aria-expanded', String(open));
+      filterNav.hidden = !open;
+    }
+    function adaptFilters() {
+      filterToggle.hidden = !compactFilters.matches;
+      setFilterOpen(!compactFilters.matches);
+    }
+    filterToggle.addEventListener('click', () => setFilterOpen(filterNav.hidden));
+    compactFilters.addEventListener('change', adaptFilters);
+    adaptFilters();
     let category = new URLSearchParams(location.search).get('kategoria') || '';
     const normalize = s => s.toLocaleLowerCase('hu').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     function filter() {
@@ -60,16 +67,31 @@
         card.hidden = Boolean((category && card.dataset.category !== category) || !normalize(card.dataset.search).includes(search));
         if (!card.hidden) count++;
       });
+      $('#category-title').textContent = category || 'Összes termék';
+      $('#filter-selection').textContent = category || 'Összes termék';
       $('#result-count').textContent = `${count} termék`;
       $('#no-results').hidden = count > 0;
     }
     links.forEach(a => a.addEventListener('click', event => {
       event.preventDefault(); category = a.dataset.filter;
       history.pushState(null, '', a.href); filter();
+      if (compactFilters.matches) { setFilterOpen(false); filterToggle.focus({ preventScroll: true }); }
     }));
     $('#search').addEventListener('input', filter);
     window.addEventListener('popstate', () => { category = new URLSearchParams(location.search).get('kategoria') || ''; filter(); });
     filter();
+    $$('.product-card').forEach(card => {
+      const product = products.find(p => p.id === card.dataset.productId);
+      $$('.card-color', card).forEach(button => button.addEventListener('click', () => {
+        const color = product.colors.find(c => c.code === button.dataset.color);
+        const img = $('.product-photo img', card);
+        img.hidden = !color.image;
+        $('.card-image-missing', card).hidden = Boolean(color.image);
+        if (color.image) { img.src = color.image; img.alt = product.name + ' – ' + color.label; }
+        $$('.card-color', card).forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+        $$('[data-product-link]', card).forEach(a => a.href = 'termekek/' + product.id + '.html?szin=' + encodeURIComponent(color.code));
+      }));
+    });
   }
   if (document.body.dataset.page === 'product') {
     const product = products.find(p => p.id === $('[data-product]').dataset.product);
@@ -98,16 +120,45 @@
       $('#total-quantity').textContent = `Összesen: ${total} darab`;
       quantities.forEach(input => input.setCustomValidity(''));
       if (total < 5 && quantities[0]) quantities[0].setCustomValidity('A teljes ajánlatkérésben legalább összesen 5 darab szükséges. Többféle termékből is összeállíthatod.');
-      $$('.remove-row').forEach(b => b.hidden = quantities.length === 1);
+      $$('.product-row').forEach((row, i) => {
+        $('.row-heading h3', row).textContent = `${i + 1}. tétel`;
+        const remove = $('.remove-row', row);
+        remove.hidden = quantities.length === 1;
+        remove.setAttribute('aria-label', `${i + 1}. tétel eltávolítása`);
+      });
     }
     function addRow(productId = '', colorCode = '') {
       const index = ++rowIndex;
       const row = document.createElement('div'); row.className = 'product-row';
-      row.innerHTML = `<div class="row-heading"><h3>Termék ${index}</h3><button class="remove-row" type="button" aria-label="Termék ${index} eltávolítása">Eltávolítás</button></div><div class="field-grid"><label class="field full">Termék neve vagy cikkszáma *<select class="product-select" name="products[${index}][id]" required></select></label><label class="field full custom-product-field" hidden>Más termék neve vagy cikkszáma *<input class="custom-product" name="products[${index}][custom]" maxlength="160" disabled></label><label class="field color-field">Választott szín *<select class="color-select" name="products[${index}][color]" required></select></label><label class="field custom-color-field" hidden>Választott szín neve vagy kódja *<input class="custom-color" name="products[${index}][customColor]" maxlength="100" disabled></label><label class="field">Tervezett darabszám *<input class="quantity" type="number" name="products[${index}][quantity]" min="1" step="1" max="100000" required inputmode="numeric" aria-describedby="quantity-help"></label><label class="field full">Méretek és méretenkénti darabszám<textarea class="sizes" name="products[${index}][sizes]" rows="2" maxlength="1000" placeholder="Például: M – 2 db, L – 3 db"></textarea></label></div>`;
+      row.innerHTML = `<div class="row-heading"><h3>Termék ${index}</h3><button class="remove-row" type="button" aria-label="Termék ${index} eltávolítása">Eltávolítás</button></div><div class="quote-product-preview" hidden><div class="quote-image-stage"><img class="quote-product-image" hidden width="160" height="180" alt=""><span class="quote-image-note"></span></div><div class="quote-product-info"><p class="quote-product-category"></p><h4 class="quote-product-name"></h4><p class="quote-product-sku"></p><p class="quote-selection" role="status"></p><a class="quote-product-link text-link">Termék részletei ↗</a></div></div><div class="field-grid"><label class="field full">Termék neve vagy cikkszáma *<select class="product-select" name="products[${index}][id]" required></select></label><label class="field full custom-product-field" hidden>Más termék neve vagy cikkszáma *<input class="custom-product" name="products[${index}][custom]" maxlength="160" disabled></label><label class="field color-field">Választott szín *<select class="color-select" name="products[${index}][color]" required></select></label><div class="quote-colors full" role="group" aria-label="Választható színek" hidden></div><label class="field custom-color-field" hidden>Választott szín neve vagy kódja *<input class="custom-color" name="products[${index}][customColor]" maxlength="100" disabled></label><label class="field">Tervezett darabszám *<input class="quantity" type="number" name="products[${index}][quantity]" min="1" step="1" max="100000" required inputmode="numeric" aria-describedby="quantity-help"></label><label class="field full">Méretek és méretenkénti darabszám<textarea class="sizes" name="products[${index}][sizes]" rows="2" maxlength="1000" placeholder="Például: M – 2 db, L – 3 db"></textarea></label></div>`;
       const select = $('.product-select', row), colors = $('.color-select', row);
       select.append(option('Válassz terméket', ''));
       products.forEach(p => select.append(option(p.name + ' · ' + p.sku, p.id)));
       select.append(option('Más termék / saját cikkszám', 'other'));
+      function updateSelection() {
+        const product = products.find(p => p.id === select.value);
+        const other = select.value === 'other';
+        const color = product?.colors.find(c => c.code === colors.value);
+        const preview = $('.quote-product-preview', row);
+        preview.hidden = !product && !other;
+        $('.quote-product-name', row).textContent = product?.name || $('.custom-product', row).value.trim() || 'Saját termék';
+        $('.quote-product-category', row).textContent = product?.category || 'Egyedi termék';
+        $('.quote-product-sku', row).textContent = product ? `${product.brand} · Cikkszám: ${product.sku}` : 'A megadott név és szín alapján egyeztetjük.';
+        const image = $('.quote-product-image', row);
+        image.hidden = !color?.image;
+        if (color?.image) { image.src = color.image; image.alt = `${product.name} – ${color.label}`; }
+        else image.removeAttribute('src');
+        const note = $('.quote-image-note', row);
+        note.hidden = Boolean(color?.image);
+        note.textContent = other ? 'Saját termék' : color ? 'Ehhez a színhez még nincs termékfotó.' : 'Válassz színt az előnézethez.';
+        const quantity = $('.quantity', row).value;
+        const selectedColor = other ? $('.custom-color', row).value.trim() : color?.label;
+        $('.quote-selection', row).textContent = `Szín: ${selectedColor || 'még nincs kiválasztva'} · ${quantity ? quantity + ' db' : 'Darabszám még nincs megadva'}`;
+        const link = $('.quote-product-link', row);
+        link.hidden = !product;
+        if (product) link.href = `termekek/${product.id}.html` + (color ? '?' + new URLSearchParams({ szin: color.code }) : '');
+        $$('.quote-color', row).forEach(button => button.setAttribute('aria-pressed', String(button.dataset.color === colors.value)));
+      }
       function setProduct() {
         const other = select.value === 'other';
         $('.custom-product-field', row).hidden = !other;
@@ -115,12 +166,38 @@
         $('.color-field', row).hidden = other;
         [$('.custom-product', row), $('.custom-color', row)].forEach(input => { input.disabled = !other; input.required = other; });
         colors.disabled = other; colors.replaceChildren(option('Válassz színt', ''));
-        products.find(p => p.id === select.value)?.colors.forEach(c => colors.append(option(c.label, c.code)));
+        const product = products.find(p => p.id === select.value);
+        colors.disabled = !product;
+        const swatches = $('.quote-colors', row);
+        swatches.replaceChildren();
+        swatches.hidden = !product;
+        swatches.setAttribute('aria-label', product ? `${product.name} választható színei` : 'Választható színek');
+        product?.colors.forEach(c => {
+          colors.append(option(c.label, c.code));
+          const button = document.createElement('button');
+          button.type = 'button'; button.className = 'quote-color'; button.dataset.color = c.code;
+          if (c.swatch) {
+            const swatch = document.createElement('img');
+            swatch.src = c.swatch; swatch.alt = ''; swatch.width = 24; swatch.height = 24;
+            button.append(swatch);
+          }
+          const label = document.createElement('span'); label.textContent = c.label;
+          button.append(label);
+          button.addEventListener('click', () => {
+            colors.value = c.code;
+            colors.dispatchEvent(new Event('change', { bubbles: true }));
+          });
+          swatches.append(button);
+        });
+        updateSelection();
       }
       select.value = products.some(p => p.id === productId) ? productId : '';
       setProduct();
       if ([...colors.options].some(o => o.value === colorCode)) colors.value = colorCode;
+      updateSelection();
       select.addEventListener('change', setProduct);
+      row.addEventListener('change', updateSelection);
+      row.addEventListener('input', updateSelection);
       $('.remove-row', row).addEventListener('click', () => {
         const rows = $$('.product-row'); const current = rows.indexOf(row);
         row.remove(); updateTotal(); invalidatePreview();

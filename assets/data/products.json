@@ -249,7 +249,16 @@
       "Oldalvarrás, megerősített vállpánt"
     ],
     "sizePreview": "assets/size-charts/basic-134.webp",
-    "sku": "134"
+    "sku": "134",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
   },
   {
     "id": "dream-128",
@@ -312,7 +321,16 @@
       "Rugalmas anyag, oldalvarrással"
     ],
     "sizePreview": "assets/size-charts/dream-128.webp",
-    "sku": "128"
+    "sku": "128",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
   },
   {
     "id": "pique-polo-203",

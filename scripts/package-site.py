@@ -5,7 +5,7 @@ root=Path(__file__).resolve().parent.parent
 dest=root/'dist'
 if dest.exists():shutil.rmtree(dest)
 dest.mkdir()
-files=['index.html','katalogus.html','ajanlatkeres.html','adatkezeles.html','assets/app.js','assets/styles.css','assets/data/products.js','assets/images/cegforma-logo.webp']
+files=['index.html','katalogus.html','ajanlatkeres.html','adatkezeles.html','assets/app.js','assets/styles.css','assets/responsive.css','assets/data/products.js','assets/images/cegforma-logo.webp','assets/images/apparel-hero-desktop.jpg','assets/images/apparel-hero-mobile.jpg']
 files += ['assets/fonts.css'] + [str(p.relative_to(root)) for p in (root/'assets/fonts').iterdir() if p.is_file()]
 for p in json.loads((root/'assets/data/products.json').read_text()):
  files.extend([f'termekek/{p["id"]}.html',p['sizeChart'],p['sizePreview']])

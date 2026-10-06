@@ -34,3 +34,11 @@ NODE_PATH=/Users/takacsmilan/.cache/codex-runtimes/codex-primary-runtime/depende
 A végleges új arculattal ismét sikeres a teljes 19 oldalas ellenőrzés, 320/390/768/1440 px szélességen. Az új betűtípusok betöltése után sincs vízszintes dokumentumkilógás. Vizuálisan ellenőrizve a kezdőlap asztali és mobil nézete, a katalógus, a termékoldal és az ajánlatkérő.
 
 Külön teszt: kezdőlapi színváltás és választást megőrző terméklink; kategória-előnézet egérrel és billentyűzetfókusszal; mindhárom SVG-elhelyezési mód; natív technológia-részletező nyitása; a DTF-opció elérhetősége az űrlapon. A helyi fontok bekerülnek a publikus csomagba. Az alkalmazáson belüli meglévő előnézet frissítve az új verzióra.
+
+## Mobilos javítások – 2026. október 6.
+
+- A választék hibája reprodukálva: 1440 px-en a következő szekció dokumentumon belüli kezdete a különböző képek hatására 1556–1899 px között változott.
+- Javítás után mind a 8 kategória valódi hoverével, a képek dekódolását megvárva és billentyűzetes fókusszal is 0 px változás: 1440, 1024 és 768 px-en.
+- Általános regresszió: 320, 360, 375, 390, 430, 600, 768, 820, 1024, 1440 px. Nincs vízszintes kilógás vagy hibás termékkép a vizsgált oldaltípusokon. A 15 termék összes színváltozata, valamint az ajánlatkérő működése sikeresen ellenőrizve.
+- Mobilos Chromium-emuláció: menü és horgony, összecsukható szűrő, valódi tap események, 44×44 px-es színválasztók, kiválasztott szín átadása az adatlapnak és űrlapnak, legalább 16 px-es űrlapmezők, méretváltás, 667×375-ös fekvő menü és JavaScript nélküli kategóriaelérés sikeres.
+- Friss vizuális ellenőrzés: `mobile-home-optimized.png`, `mobile-about-optimized.png`, `mobile-catalog-optimized.png`, `mobile-quote-optimized.png`.
