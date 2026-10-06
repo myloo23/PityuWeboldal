@@ -1,0 +1,18 @@
+JACKET 501
+Fleece
+NEW
+sizseiz [ec [mcm] ] S S M M L L XL XL2XL 2X3LXL 4XL
+A 69 71 73 75 77 79 81
+C 52 56 60 64 69 75 81
+H 65,5 66,5 67,5 68,5 69,5 70,5 71,5
+ORIGINAL
+sizseiz [ec [mcm] ] S S M L XL2XL 2X3LXL 4XL
+A 69 77 80 83
+C 56 64 67 70
+H 63 71 73 50175
+All size specifications listed are in cm. Accepted tolerance of up to +/- 5%.
+C
+H
+A
+P G 0 2 0 1 40670
+OETI

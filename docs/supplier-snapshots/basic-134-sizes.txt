@@ -1,0 +1,16 @@
+134
+Basic
+SIZE SPECIFICATION [cm]
+size XS S M L XL 2XL 3XL
+A 62 64 66 68,5 71 73,5 76
+C 40 44 48 52 58 64 70
+H 15,5 16,5 17,5 18,5 19,5 20,5 21,5
+134
+All size specifications listed are in cm. Accepted tolerance of up to ± 5%.
+H
+BWaOsMicAN134L
+C
+A
+Barvy 03, 12 / Colours 03, 12:
+P G 0 2 0 1 53249 Ostatní / Other colours:
+OETI

@@ -1,0 +1,15 @@
+128
+Dream
+SIZE SPECIFICATION [cm]
+size XS S M L XL 2XL 3XL
+A 60 62 64 66 68,5 70,5 72,5
+C 39 43 47 51 57 63 69
+H 23,5 25 26 27,5 29,5 31,5 33,5
+All size specifications listed are in cm. Accepted tolerance of up to ± 5%.
+128
+H
+DWrOeaMmAN128L
+C
+A
+P G 0 2 0 1 53249
+OETI

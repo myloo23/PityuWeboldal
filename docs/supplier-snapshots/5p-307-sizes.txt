@@ -1,0 +1,12 @@
+307
+5P
+SIZE SPECIFICATION [cm]
+size uni
+A 19
+B 11
+307
+All size specifications listed are in cm. Accepted tolerance of up to ± 5%.
+A
+B
+P G 0 2 0 1 53249
+OETI
