@@ -42,7 +42,7 @@ A statikus oldalhoz nem szükséges URL-átírás vagy szerveroldali futtatókö
 
 ## Az ajánlatkérő jelenlegi működése
 
-A kötelező adatok ellenőrzése után a böngésző másolható szöveges összesítőt készít. Nincs hálózati beküldés, adatmentés vagy automatikus e-mail. A felhasználó külön másolhatja ki és küldheti el a szöveget saját levelezőjéből. A felület ezt a kitöltés előtt és után is jelzi. A minimum az összes terméksor mennyiségére vonatkozik; például 3 férfi + 2 női póló elfogadott.
+A kötelező adatok ellenőrzése után a böngésző másolható szöveges összesítőt készít. Nincs hálózati beküldés, automatikus adatmentés vagy automatikus e-mail. Az összesítő külön gombbal szövegfájlként letölthető a saját eszközre. A felhasználó külön másolhatja ki és küldheti el a szöveget saját levelezőjéből. A felület ezt a kitöltés előtt és után is jelzi. A minimum az összes terméksor mennyiségére vonatkozik; például 3 férfi + 2 női póló elfogadott.
 
 A következő körben egy egyszerű PHP-végpont köthető be: szerveroldali mezőellenőrzés és összesített minimum, rögzített címzett (`cegforma@gmail.com`), tárhelyen hitelesíthető feladó és validált Reply-To, fejlécinjektálás elleni védelem, küldési gyakoriság korlátozása, siker/hiba visszajelzés és az adatkezelési tájékoztató alapján kialakított mezők. Fájlfeltöltés csak külön pontosítás után készül. Az összesítő gombot a valódi küldés bekötésekor kell beküldő gombra cserélni.
 
@@ -118,3 +118,12 @@ A megerősített domain **cegforma.hu** (a korábbi `cegfoma.hu` elírás). A SE
 Az `adatkezeles.html`, `impresszum.html`, `sutik.html` és `ajanlatkeresi-feltetelek.html` forrásai a `templates/legal/` mappában szerkeszthetők. A jogi oldalak és ajánlatkérő `noindex,follow` jelölésűek. A tájékoztatók hiányzó adatai láthatóan jelöltek: **nem végleges jogi dokumentumok**. Az oldal kódja nem használ sütit, külső követőt vagy tartós böngészős tárolást, így nincs látszat-hozzájárulást kérő banner. Új követő bevezetésekor tényleges előzetes blokkolás, visszavonható választás és frissített tájékoztató szükséges.
 
 Továbbküldhető ügyfélkérdések, véglegesítési és indulási teendők: `docs/ugyfeltol-bekerendo-adatok.md`. Az eredeti követelménydokumentum történeti forrásként megmarad. A tárhely és Gmail tényleges adatkezelése külön ellenőrizendő. A csomagoló a négy jogi oldalt, robots.txt és sitemap.xml fájlokat is beleteszi a dist mappába. A `legal_approved` konfigurációs mező státuszjelzés, nem automatikus jogi ellenőrzés vagy publikálási engedély.
+
+
+## Használhatósági fejlesztések – 2026. október 8.
+
+- A katalógus a keresést és kategóriát az URL-ben őrzi meg. Újratöltés, megosztás és vissza/előre navigáció esetén is visszaállnak; a gépelés nem hoz létre külön előzményt minden karakterhez.
+- A keresés több szót, tetszőleges sorrendet és ékezet nélküli bevitelt is kezel (például `134 noi`). A „Keresés és szűrők törlése” gomb visszaállítja a teljes választékot.
+- A termékoldali színválasztás frissíti a megosztható címet. Hiányzó vagy ismeretlen színparaméternél a sablon alapértelmezett, fotóval rendelkező színe marad érvényes.
+- Az ajánlatkérő összesítője UTF-8 szövegfájlként is letölthető. Módosításkor a korábbi összesítő tartalma törlődik, újat kell készíteni. A letöltés nem küld e-mailt, nem ment böngészős adattárba; a működés leírása a tájékoztatókban is frissült.
+- Célzott ellenőrzés: `scripts/check-usability.cjs` (Playwright és Chrome). Lefedés: keresés, előzmények, visszaállítás, szín megőrzése, hibás mező javítása, minimum mennyiség, letöltött fájl pontos tartalma, összesítő érvénytelenítése és mobilos elrendezés.

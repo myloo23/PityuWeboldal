@@ -56,29 +56,50 @@
     filterToggle.addEventListener('click', () => setFilterOpen(filterNav.hidden));
     compactFilters.addEventListener('change', adaptFilters);
     adaptFilters();
-    let category = new URLSearchParams(location.search).get('kategoria') || '';
+    const searchInput = $('#search');
+    const resetFilters = $('#reset-filters');
+    let category = '';
+    function readFilters() {
+      const params = new URLSearchParams(location.search);
+      category = params.get('kategoria') || '';
+      searchInput.value = params.get('kereses') || '';
+    }
+    function writeFilters(push = false) {
+      const url = new URL(location.href);
+      if (category) url.searchParams.set('kategoria', category);
+      else url.searchParams.delete('kategoria');
+      if (searchInput.value.trim()) url.searchParams.set('kereses', searchInput.value);
+      else url.searchParams.delete('kereses');
+      if (url.href !== location.href) history[push ? 'pushState' : 'replaceState'](null, '', url);
+    }
     const normalize = s => s.toLocaleLowerCase('hu').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     function filter() {
       if (!links.some(a => a.dataset.filter === category)) category = '';
       links.forEach(a => a.setAttribute('aria-current', String(a.dataset.filter === category)));
-      const search = normalize($('#search').value.trim());
+      const terms = normalize(searchInput.value.trim()).split(/\s+/).filter(Boolean);
       let count = 0;
       $$('.product-card').forEach(card => {
-        card.hidden = Boolean((category && card.dataset.category !== category) || !normalize(card.dataset.search).includes(search));
+        card.hidden = Boolean((category && card.dataset.category !== category) || !terms.every(term => normalize(card.dataset.search).includes(term)));
         if (!card.hidden) count++;
       });
       $('#category-title').textContent = category || 'Összes termék';
       $('#filter-selection').textContent = category || 'Összes termék';
       $('#result-count').textContent = `${count} termék`;
       $('#no-results').hidden = count > 0;
+      resetFilters.hidden = !category && !searchInput.value;
     }
     links.forEach(a => a.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault(); category = a.dataset.filter;
-      history.pushState(null, '', a.href); filter();
+      writeFilters(true); filter();
       if (compactFilters.matches) { setFilterOpen(false); filterToggle.focus({ preventScroll: true }); }
     }));
-    $('#search').addEventListener('input', filter);
-    window.addEventListener('popstate', () => { category = new URLSearchParams(location.search).get('kategoria') || ''; filter(); });
+    searchInput.addEventListener('input', () => { filter(); writeFilters(); });
+    resetFilters.addEventListener('click', () => {
+      category = ''; searchInput.value = ''; writeFilters(true); filter(); searchInput.focus();
+    });
+    window.addEventListener('popstate', () => { readFilters(); filter(); });
+    readFilters();
     filter();
     $$('.product-card').forEach(card => {
       const product = products.find(p => p.id === card.dataset.productId);
@@ -95,6 +116,7 @@
   }
   if (document.body.dataset.page === 'product') {
     const product = products.find(p => p.id === $('[data-product]').dataset.product);
+    const defaultColor = $('.swatch[aria-pressed="true"]').dataset.color;
     function selectColor(code) {
       const color = product.colors.find(c => c.code === code);
       if (!color) return;
@@ -106,14 +128,23 @@
       $$('.swatch').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.color === code)));
       $('#product-quote').href = '../ajanlatkeres.html?' + new URLSearchParams({ termek: product.id, szin: code });
     }
-    $$('.swatch').forEach(b => b.addEventListener('click', () => selectColor(b.dataset.color)));
-    selectColor(new URLSearchParams(location.search).get('szin'));
+    function readColor() {
+      const code = new URLSearchParams(location.search).get('szin');
+      selectColor(product.colors.some(c => c.code === code) ? code : defaultColor);
+    }
+    $$('.swatch').forEach(b => b.addEventListener('click', () => {
+      selectColor(b.dataset.color);
+      const url = new URL(location.href); url.searchParams.set('szin', b.dataset.color);
+      history.replaceState(null, '', url);
+    }));
+    window.addEventListener('popstate', readColor);
+    readColor();
   }
   if (document.body.dataset.page === 'quote') {
     const form = $('#quote-form');
     let rowIndex = 0;
     function option(text, value = text) { const o = document.createElement('option'); o.textContent = text; o.value = value; return o; }
-    function invalidatePreview() { $('#quote-preview').hidden = true; $('#copy-status').textContent = ''; }
+    function invalidatePreview() { $('#quote-preview').hidden = true; $('#preview-text').value = ''; $('#copy-status').textContent = ''; }
     function updateTotal() {
       const quantities = $$('.quantity');
       const total = quantities.reduce((sum, input) => sum + (Number(input.value) || 0), 0);
@@ -217,9 +248,10 @@
       $('#ratio-note').hidden = !value;
     }
     $('#placement').addEventListener('change', placement);
+    placement();
     form.addEventListener('input', () => { updateTotal(); invalidatePreview(); });
     form.addEventListener('change', invalidatePreview);
-    // No form data is sent, persisted, or placed in URLs in this prototype.
+    // Form data stays on this page; copying or downloading requires an explicit click.
     form.addEventListener('submit', event => {
       event.preventDefault(); updateTotal();
       $$('input[required]', form).forEach(input => {
@@ -245,6 +277,15 @@
     $('#copy-quote').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText($('#preview-text').value); $('#copy-status').textContent = 'Kimásolva. Illeszd be a leveledbe, majd küldd el a cegforma@gmail.com címre.'; }
       catch { $('#preview-text').focus(); $('#preview-text').select(); $('#copy-status').textContent = 'A szöveget kijelöltük. Másold ki a készüléked másolás funkciójával.'; }
+    });
+    $('#download-quote').addEventListener('click', () => {
+      const blob = new Blob(['\uFEFF', $('#preview-text').value], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url; link.download = 'cegforma-ajanlatkeres.txt';
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      $('#copy-status').textContent = 'A letöltést elindítottuk. A fájlt csatolhatod a cegforma@gmail.com címre küldött leveledhez.';
     });
   }
 })();

@@ -428,3 +428,6 @@ h1{overflow-wrap:anywhere}.section>h1{font-size:clamp(32px,5vw,64px);line-height
 .legal-data dt{font-weight:700;padding-right:20px}
 @media(max-width:600px){.legal-page{padding-top:36px;padding-bottom:48px}.legal-data{display:block}.legal-data dt{border:0;padding-bottom:0}.legal-data dd{padding-top:3px}}
 @media print{.site-header,footer,.skip{display:none}.legal-page{max-width:none;padding:0}.legal-page h2{break-after:avoid}.legal-page .notice{border:1px solid #777}}
+
+/* Catalog recovery action stays usable on touch screens. */
+.reset-filters{margin:0 0 20px;min-height:44px;white-space:normal;text-align:left}
