@@ -66,7 +66,7 @@ const {chromium}=require('playwright');const fs=require('fs');const assert=requi
  await page.locator('.quantity').first().fill('4');assert.equal(await page.locator('#quote-preview').isVisible(),false);
  await page.locator('.remove-row').nth(1).click();assert.equal(await page.locator('.quantity').evaluate(e=>e.validity.valid),false);
  await page.locator('.quantity').fill('5');await page.locator('.product-select').selectOption('other');await page.locator('.custom-product').fill('Egyedi bögre');await page.locator('.custom-color').fill('Egyeztetendő');await page.locator('#preview-button').click();assert.ok((await page.locator('#preview-text').inputValue()).includes('Egyedi bögre'));
- assert.equal(await page.locator('input[type="file"]').count(),0);assert.deepEqual(errors,[]);
+ assert.equal(await page.locator('input[type="file"]').count(),1);assert.deepEqual(errors,[]);
  await page.setViewportSize({width:1440,height:1000});await page.goto(url+'katalogus.html');await shot({path:'docs/qa/catalog-desktop.png',fullPage:true});await page.goto(url+'termekek/classic-new-132.html');await shot({path:'docs/qa/product-desktop.png',fullPage:true});
  await browser.close();console.log('PASS: 19 pages; 15 products; all requested color variants; 10 viewport widths; filtering, menu, quote transfer, combined minimum, optional fields, summary and no browser errors.');
 })();

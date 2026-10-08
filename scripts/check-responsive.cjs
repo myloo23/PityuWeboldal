@@ -57,7 +57,7 @@ const base = 'http://127.0.0.1:8080/';
   assert.equal(await phone.locator('[data-color="07"]').getAttribute('aria-pressed'), 'true');
   await phone.locator('#product-quote').tap();
   assert.equal(await phone.locator('.color-select').inputValue(), '07');
-  const controls = await phone.locator('input,select,textarea').evaluateAll(els => els.filter(el => !el.disabled && el.getClientRects().length).map(el => ({font: parseFloat(getComputedStyle(el).fontSize), width:el.getBoundingClientRect().width})));
+  const controls = await phone.locator('input,select,textarea').evaluateAll(els => els.filter(el => !el.disabled && !el.closest('[aria-hidden="true"]') && el.getClientRects().length).map(el => ({font: parseFloat(getComputedStyle(el).fontSize), width:el.getBoundingClientRect().width})));
   assert.ok(controls.every(el => el.font >= 16 && el.width >= 200), 'Mobile form controls too small');
   await phone.screenshot({ path: 'docs/qa/mobile-quote-optimized.png', fullPage: true });
   await load('katalogus.html');

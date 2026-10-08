@@ -38,13 +38,17 @@ python3 scripts/package-site.py
 
 **Csak a `dist/` mappa tartalmát** töltsd fel a domain dokumentumgyökerébe, az `index.html` a gyökérbe kerüljön. A teljes projektet, az `Emailek/` és `docs/` mappákat ne töltsd fel. A csomagoló engedélyezőlista alapján csak a publikus weboldalfájlokat másolja; a `dist/` generált könyvtár tartalmát minden futáskor újrakészíti.
 
-A statikus oldalhoz nem szükséges URL-átírás vagy szerveroldali futtatókörnyezet. A későbbi e-mailes beküldéshez PHP-t támogató tárhely szükséges; a csomag még egyeztetendő. A domain az ügyfél dokumentuma alapján **cegfoma.hu**; nem javítottuk át önkényesen.
+A statikus oldalhoz nem szükséges URL-átírás vagy szerveroldali futtatókörnyezet. Az e-mailes beküldéshez PHP 8.2+ és SMTP-elérés szükséges; az éles csomag képességeit ellenőrizni kell. A megerősített domain **cegforma.hu**.
 
 ## Az ajánlatkérő jelenlegi működése
 
-A kötelező adatok ellenőrzése után a böngésző másolható szöveges összesítőt készít. Nincs hálózati beküldés, automatikus adatmentés vagy automatikus e-mail. Az összesítő külön gombbal szövegfájlként letölthető a saját eszközre. A felhasználó külön másolhatja ki és küldheti el a szöveget saját levelezőjéből. A felület ezt a kitöltés előtt és után is jelzi. A minimum az összes terméksor mennyiségére vonatkozik; például 3 férfi + 2 női póló elfogadott.
+Elkészült a kétlépéses összesítés → küldés, a PHP/SMTP-végpont és a többfájlos grafikafeltöltés. JPG, PNG, PDF és passzív SVG választható, fájlonként elhelyezéssel. Alapkorlát: 5 fájl, fájlonként 5 MiB, összesen 10 MiB. A szerver a termékeket/színeket a generált katalógusból ellenőrzi; minimum összesen 5 darab. A címzett rögzítetten `cegforma@gmail.com`, a látogató e-mailje csak Reply-To.
 
-A következő körben egy egyszerű PHP-végpont köthető be: szerveroldali mezőellenőrzés és összesített minimum, rögzített címzett (`cegforma@gmail.com`), tárhelyen hitelesíthető feladó és validált Reply-To, fejlécinjektálás elleni védelem, küldési gyakoriság korlátozása, siker/hiba visszajelzés és az adatkezelési tájékoztató alapján kialakított mezők. Fájlfeltöltés csak külön pontosítás után készül. Az összesítő gombot a valódi küldés bekötésekor kell beküldő gombra cserélni.
+**Az éles küldés még inaktív.** A `quote_enabled` értéke false; a privát szerverkonfiguráció és az éles SMTP-próba hiányzik. Így a jelenlegi build helyi összesítőt készít, a grafikákat a felhasználó saját leveléhez csatolja. Az aktiváláshoz mind a build-, mind a szerveroldali kapcsoló szükséges. A jogi oldalak működésleírása a build kapcsolóját követi; a tervezetek véglegesítése külön feladat.
+
+A szerver HMAC-tokennel, Origin-ellenőrzéssel, rejtett botmezővel, IP-nkénti és globális órás korláttal, valamint kérésazonosító szerinti ismétlésvédelemmel működik. Nincs új cookie vagy böngészős adattár. A grafika csak PHP ideiglenes feltöltési fájl; a webszerver nem ad róla nyilvános URL-t. A MIME-típus ellenőrzése nem vírusvizsgálat. Az SMTP-átvétel nem beérkezőmappa-garancia.
+
+Beállítás, tesztelés, mentés, visszaállítás: [docs/elesites.md](docs/elesites.md). Csak a még megválaszolatlan ügyfélkérdések: [docs/ugyfelnek-fontos-kerdesek.md](docs/ugyfelnek-fontos-kerdesek.md).
 
 ## Források és hiányzó adatok
 
@@ -54,7 +58,7 @@ A logó az ügyfél `.eml` csatolmányából származik; az eredeti is megmaradt
 - Soft Padded Jacket – `Black/Black`: a kért névhez nem volt közvetlenül hozzárendelhető beszállítói kép/színminta; látható helyőrző maradt. Más szín fényképével nem helyettesítettük.
 - Original Patch Beanie és Ultimate 5 Panel Cap: a beszállító „mérettáblázat” linkje részletes méretsor nélküli termékadatlap. A PDF elérhető, a méretadat hiányát az adatlap jelzi.
 - Jacket 501: a beszállító eredeti és új szabást is megad; ezt és a mindkettőt tartalmazó táblázatot megőriztük.
-- Hiányzik a pontos cím, az adatkezelési szöveg. A telefonszám bekérhető az űrlapon, de a cég publikus telefonszáma sehol nem jelenik meg.
+- A pontos cím és a cégadatok már megvannak; a jogi oldalak tervezeteinek véglegesítése nyitott. A telefonszám bekérhető az űrlapon, de a cég publikus telefonszáma sehol nem jelenik meg.
 - A bögre szolgáltatás szerepel, de konkrét bögreterméket nem találtunk ki.
 - Publikálás előtt a beszállítói tartalmak felhasználási jogosultsága, a tárhely és a nyitott ügyféladatok tisztázandók a követelménydokumentum szerint.
 
@@ -131,3 +135,9 @@ Továbbküldhető ügyfélkérdések, véglegesítési és indulási teendők: `
 ## Jogi tervezetek frissítése – 2026. október 8.
 
 A korábbi hiánylistát felülírva bekerültek az ügyfél által megadott cégadatok, a székhely/üzlet/átvétel címe, a kizárólagos B2B értékesítés és a Gmailes grafikatárolás. A leveleket Balogh István kezeli; külső gyártónak nem továbbítja. A telefonszám a korábbi kérés szerint nem publikus. Az adatkezelési tájékoztató külön jelöli a 6 hónapos és kétéves megőrzési javaslatot, valamint a tervezett törlést. A jogi oldalak továbbra is tervezetek, a szolgáltatói részletek és szerződéskötés véglegesítése nyitott. Aktuális állapot: `docs/ugyfeltol-bekerendo-adatok.md`. A jelenlegi űrlap továbbra is helyi összesítő.
+
+## Ajánlatküldés megvalósítása – 2026. október 8.
+
+PHP 8.2+, fileinfo, mbstring, DOM/libxml és OpenSSL szükséges. A PHPMailer 7.1.1 forrásai és LGPL-licence a `server/vendor/phpmailer/` mappában szerepelnek, verzióval és SHA-256 jegyzékkel. Nincs szükség Composerre a tárhelyen. Forrás: https://github.com/PHPMailer/PHPMailer/tree/v7.1.1 . A könyvtár biztonsági frissítéseit az üzemeltetés részeként követni kell.
+
+Teszt: `python3 scripts/check-delivery.py` (PHP, Node, Playwright, Chrome); kizárólag helyi SMTP-t használ. Általános regresszió: `node scripts/check-all.cjs`, a projektet kiszolgáló 8080-as előnézet mellett. Indulási ellenőrzés: `python3 scripts/check-release.py`; a hiányzó jogi jóváhagyás és az inaktív küldés miatt jelenleg szándékosan hibával áll meg.

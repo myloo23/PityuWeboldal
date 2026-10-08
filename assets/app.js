@@ -143,8 +143,39 @@
   if (document.body.dataset.page === 'quote') {
     const form = $('#quote-form');
     let rowIndex = 0;
+    let artwork = [], pendingDelivery = null, sending = false, delivered = false;
+    const sendButton = $('#send-quote'), sendStatus = $('#send-status');
+    function renderArtwork() {
+      const list = $('#artwork-list'); list.replaceChildren();
+      artwork.forEach((item, index) => {
+        const row = document.createElement('div'); row.className = 'artwork-row';
+        const label = document.createElement('label'); label.className = 'field';
+        label.append(`${item.file.name} (${(item.file.size / 1024 / 1024).toFixed(2)} MB) – minta helye`);
+        const select = document.createElement('select');
+        ['Egyeztetendő', 'Elöl', 'Hátul', 'Mindkét oldalon'].forEach(side => select.append(option(side)));
+        select.value = item.side;
+        select.addEventListener('change', () => { item.side = select.value; invalidatePreview(); });
+        label.append(select);
+        const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'button outline small';
+        remove.textContent = 'Eltávolítás'; remove.setAttribute('aria-label', item.file.name + ' eltávolítása');
+        remove.addEventListener('click', () => { artwork.splice(index, 1); renderArtwork(); invalidatePreview(); $('#artwork').focus(); });
+        row.append(label, remove); list.append(row);
+      });
+    }
+    $('#artwork').addEventListener('change', event => {
+      const files = [...event.target.files];
+      const all = [...artwork.map(item => item.file), ...files];
+      let error = '';
+      if (all.length > 5) error = 'Legfeljebb 5 fájl csatolható.';
+      else if (files.some(file => !/\.(jpe?g|png|pdf|svg)$/i.test(file.name))) error = 'JPG, PNG, PDF és SVG fájl csatolható.';
+      else if (files.some(file => !file.size || file.size > 5 * 1024 * 1024)) error = 'Üres vagy 5 MB-nál nagyobb fájl nem csatolható.';
+      else if (all.reduce((sum, file) => sum + file.size, 0) > 10 * 1024 * 1024) error = 'Összesen legfeljebb 10 MB csatolható.';
+      $('#artwork-error').textContent = error;
+      if (!error) { artwork.push(...files.map(file => ({ file, side: 'Egyeztetendő' }))); renderArtwork(); }
+      event.target.value = ''; invalidatePreview();
+    });
     function option(text, value = text) { const o = document.createElement('option'); o.textContent = text; o.value = value; return o; }
-    function invalidatePreview() { $('#quote-preview').hidden = true; $('#preview-text').value = ''; $('#copy-status').textContent = ''; }
+    function invalidatePreview() { $('#quote-preview').hidden = true; $('#preview-text').value = ''; $('#copy-status').textContent = ''; pendingDelivery = null; delivered = false; sendStatus.textContent = ''; sendButton.disabled = false; }
     function updateTotal() {
       const quantities = $$('.quantity');
       const total = quantities.reduce((sum, input) => sum + (Number(input.value) || 0), 0);
@@ -251,7 +282,7 @@
     placement();
     form.addEventListener('input', () => { updateTotal(); invalidatePreview(); });
     form.addEventListener('change', invalidatePreview);
-    // Form data stays on this page; copying or downloading requires an explicit click.
+    // Preview stays local; only the separate send button starts a network request.
     form.addEventListener('submit', event => {
       event.preventDefault(); updateTotal();
       $$('input[required]', form).forEach(input => {
@@ -268,9 +299,46 @@
       lines.push($('#total-quantity').textContent, '', 'EMBLÉMÁZÁS', 'Technológia: ' + (data.get('technology') || 'Később egyeztetjük'), 'Minta helye: ' + (data.get('placement') || 'Később egyeztetjük'));
       if (data.get('frontHeight')) lines.push('Elülső grafika magassága: ' + data.get('frontHeight') + ' cm');
       if (data.get('backHeight')) lines.push('Hátsó grafika magassága: ' + data.get('backHeight') + ' cm');
+      if (artwork.length) lines.push('', 'GRAFIKÁK', ...artwork.map(item => `${item.file.name} – ${item.side}`), 'A szöveges letöltés nem tartalmazza a csatolmányokat.');
       if (data.get('notes')?.trim()) lines.push('', 'MEGJEGYZÉS', data.get('notes'));
       $('#preview-text').value = lines.join('\n');
       $('#quote-preview').hidden = false; $('#preview-heading').focus();
+    });
+    sendButton.addEventListener('click', async () => {
+      if (sending || delivered || form.dataset.online !== 'true' || !form.reportValidity() || !$('#preview-text').value) return;
+      sending = true; sendButton.disabled = true; form.setAttribute('aria-busy', 'true');
+      sendStatus.dataset.error = 'false'; sendStatus.textContent = 'Küldés folyamatban…';
+      const payload = pendingDelivery?.payload || new FormData(form);
+      if (!pendingDelivery) artwork.forEach((item, index) => { payload.append('artwork[]', item.file); payload.append(`artworkSide[${index}]`, item.side); });
+      // Freeze the editable fields while the snapshot is sent, preserving existing disabled states.
+      const controls = [...form.querySelectorAll('input, select, textarea, button')];
+      const states = controls.map(control => control.disabled);
+      controls.forEach(control => control.disabled = true);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 90000);
+      try {
+        if (!pendingDelivery) {
+          const tokenResponse = await fetch('api/quote.php', { cache: 'no-store', credentials: 'omit', signal: controller.signal });
+          const tokenData = await tokenResponse.json();
+          if (!tokenResponse.ok || !tokenData.token) throw new Error(tokenData.message || 'Az online küldés jelenleg nem elérhető.');
+          payload.set('token', tokenData.token); pendingDelivery = { payload };
+        }
+        const response = await fetch('api/quote.php', { method: 'POST', body: payload, credentials: 'omit', signal: controller.signal });
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          if (response.status === 403) pendingDelivery = null;
+          throw new Error(result.message || 'Nem sikerült igazolni a küldést.');
+        }
+        delivered = true;
+        sendStatus.textContent = `Az ajánlatkérést a levelezőszerver átvette. Azonosító: ${result.reference}. Ez még nem megrendelés vagy személyes visszaigazolás.`;
+      } catch (error) {
+        sendStatus.dataset.error = 'true';
+        sendStatus.textContent = error instanceof SyntaxError ? 'Az online küldés jelenleg nem elérhető. Az összesítőt és a grafikákat saját leveleződből is elküldheted.' : error.name === 'AbortError' || error instanceof TypeError ? 'A küldés állapota hálózati hiba miatt nem ismert. Az adataid megmaradtak; az ismételt kattintás ugyanannak a kérésnek az állapotát ellenőrzi.' : error.message;
+      } finally {
+        clearTimeout(timeout); sending = false;
+        controls.forEach((control, index) => control.disabled = states[index]);
+        sendButton.disabled = delivered; form.removeAttribute('aria-busy'); sendStatus.focus();
+      }
     });
     // Clear custom whitespace errors as soon as the user corrects a required field.
     form.addEventListener('input', event => { if (event.target.matches('input[required]:not(.quantity)')) event.target.setCustomValidity(''); });

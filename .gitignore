@@ -82,3 +82,7 @@ blob-report/
 # Logs & temporary files
 # ==========================================
 *.log
+
+# Private quote service configuration and runtime state
+config/quote.local.php
+cegforma-private/

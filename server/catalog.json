@@ -1,0 +1,162 @@
+{
+  "classic-new-132": {
+    "name": "Classic New 132",
+    "sku": "132",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "69": "Színkód: 69"
+    }
+  },
+  "basic-129": {
+    "name": "Basic 129",
+    "sku": "129",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "69": "Színkód: 69"
+    }
+  },
+  "heavy-new-137": {
+    "name": "Heavy New 137",
+    "sku": "137",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "69": "Színkód: 69"
+    }
+  },
+  "basic-134": {
+    "name": "Basic 134",
+    "sku": "134",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "44": "Színkód: 44"
+    }
+  },
+  "dream-128": {
+    "name": "Dream 128",
+    "sku": "128",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "44": "Színkód: 44"
+    }
+  },
+  "pique-polo-203": {
+    "name": "Pique Polo férfi 203",
+    "sku": "203",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "69": "Színkód: 69"
+    }
+  },
+  "pique-polo-210": {
+    "name": "Pique Polo női 210",
+    "sku": "210",
+    "colors": {
+      "00": "Színkód: 00",
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "12": "Színkód: 12",
+      "44": "Színkód: 44"
+    }
+  },
+  "jacket-501": {
+    "name": "Jacket 501",
+    "sku": "501",
+    "colors": {
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "06": "Színkód: 06",
+      "69": "Színkód: 69"
+    }
+  },
+  "5p-307": {
+    "name": "5P 307",
+    "sku": "307",
+    "colors": {
+      "01": "Színkód: 01",
+      "05": "Színkód: 05",
+      "07": "Színkód: 07",
+      "25": "Színkód: 25"
+    }
+  },
+  "ultimate-5-panel-cap-sandwich-peak": {
+    "name": "Ultimate 5 Panel Cap – Sandwich Peak",
+    "sku": "303.69",
+    "colors": {
+      "Black/Orange": "Black/Orange",
+      "Black/Lime Green": "Black/Lime Green",
+      "Black/Light Grey": "Black/Light Grey",
+      "Bright Royal/White": "Bright Royal/White"
+    }
+  },
+  "original-patch-beanie": {
+    "name": "Original Patch Beanie",
+    "sku": "319.69",
+    "colors": {
+      "White": "White",
+      "Black": "Black",
+      "French Navy": "French Navy",
+      "Bottle Green": "Bottle Green"
+    }
+  },
+  "printable-softshell-jacket": {
+    "name": "Printable Softshell Jacket",
+    "sku": "828.33",
+    "colors": {
+      "Black/Orange": "Black/Orange",
+      "Black/Black": "Black/Black",
+      "Navy/Royal": "Navy/Royal"
+    }
+  },
+  "men-s-printable-softshell-bodywarmer": {
+    "name": "Men's Printable Softshell Bodywarmer",
+    "sku": "845.33",
+    "colors": {
+      "Black/Orange": "Black/Orange",
+      "Black/Black": "Black/Black",
+      "Navy/Royal": "Navy/Royal"
+    }
+  },
+  "thermoquilt-gilet": {
+    "name": "Thermoquilt Gilet",
+    "sku": "953.33",
+    "colors": {
+      "Black/Black": "Black/Black",
+      "Black/Orange": "Black/Orange",
+      "Navy/Lime": "Navy/Lime"
+    }
+  },
+  "soft-padded-jacket": {
+    "name": "Soft Padded Jacket",
+    "sku": "872.33",
+    "colors": {
+      "Black/Black": "Black/Black",
+      "Black/Orange": "Black/Orange",
+      "Navy/Lime": "Navy/Lime"
+    }
+  }
+}

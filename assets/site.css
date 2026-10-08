@@ -431,3 +431,14 @@ h1{overflow-wrap:anywhere}.section>h1{font-size:clamp(32px,5vw,64px);line-height
 
 /* Catalog recovery action stays usable on touch screens. */
 .reset-filters{margin:0 0 20px;min-height:44px;white-space:normal;text-align:left}
+
+/* Quote delivery and accessible attachment controls. */
+.quote-trap { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.artwork-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; padding:16px 0; border-bottom:1px solid #d8e0e4; }
+.artwork-row .field { min-width:0; overflow-wrap:anywhere; }
+.artwork-row button { align-self:end; min-height:44px; }
+#artwork { max-width:100%; min-width:0; }
+#artwork-error, #send-status[data-error="true"] { color:#a32020; }
+#send-status { overflow-wrap:anywhere; }
+.quote-form[aria-busy="true"] { opacity:.8; }
+@media(max-width:480px) { .artwork-row { grid-template-columns:minmax(0,1fr); } }

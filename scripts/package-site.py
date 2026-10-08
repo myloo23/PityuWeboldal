@@ -13,6 +13,8 @@ for p in json.loads((root/'assets/data/products.json').read_text()):
  for c in p['colors']:
   if c.get('image'):files.append(c['image'])
   if c.get('swatch') and not c['swatch'].startswith('data:'):files.append(c['swatch'])
+files += ['api/quote.php','server/quote.php','server/catalog.json','server/.htaccess']
+files += [str(p.relative_to(root)) for p in (root/'server/vendor/phpmailer').iterdir() if p.is_file()]
 for name in dict.fromkeys(files):
  target=dest/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(root/name,target)
 print(f'Prepared {len(set(files))} public files in dist/; emails and developer documents excluded.')

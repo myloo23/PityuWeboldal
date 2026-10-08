@@ -27,7 +27,7 @@ Frissítve: 2026. október 8. Az ügyfél jogi tárgyú levele és a Gmailes tá
 
 ## Fejlesztői és jogi véglegesítési feladatok
 
-- A jelenlegi űrlap helyi összesítő: nincs hálózati beküldés, fájlfeltöltés vagy weboldali adatbázis. A kért e-mailes beküldés és többfájlos feltöltés még megvalósítandó; nem elhagyott igény. E funkciók szolgáltatóit, adatútját, ideiglenes tárolását, hozzáféréseit és törlését a megvalósítással együtt kell meghatározni.
+- Az e-mailes beküldés és többfájlos feltöltés megvalósult és helyi SMTP-vel tesztelhető. Az éles küldés még ki van kapcsolva: Rackhost-/SMTP-konfiguráció, végleges tájékoztatók és valódi kézbesítési próba szükséges. Nincs weboldali ajánlat-adatbázis; a feltöltések a feldolgozás idejére kerülnek PHP ideiglenes fájlba, majd e-mail-mellékletként a Gmailbe. A technikai ismétlésvédelem külön, privát állapotfájlt használ. Részletek: `docs/elesites.md`.
 - Rackhost szerződő adatai, éles naplózás, megőrzés, HTTPS és esetleges szerveroldali sütik ellenőrzendők.
 - Gmail szerződő szolgáltatója, alkalmazandó feltételei, adatvédelmi szerepei és nemzetközi adattovábbításai ellenőrzendők. Az üzleti ügyintéző személye már ismert.
 - Az etetoanyag.hu régi szolgáltatóit és 5 éves érdeklődői megőrzését nem másoljuk át. A két kapott hivatkozás: https://etetoanyag.hu/shop_help.php?tab=privacy_policy és https://etetoanyag.hu/shop_help.php?tab=terms . Az utóbbi lekérésekor sem állt rendelkezésre külön ellenőrzött ÁSZF-szöveg.
@@ -58,3 +58,7 @@ A jogi oldalak frissített tervezetek. Az ismert tények bekerültek, a fennmara
 További források a felülvizsgálathoz:
 - EDPB – tájékoztatás és érintetti jogok: https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
 - EU – sütik és hozzájárulás: https://europa.eu/youreurope/business/growing/digitalising/online-privacy/index_en.htm
+
+## Rövid ügyfélkérdés-lista
+
+A továbbküldhető, megválaszolatlan kérdések külön: `docs/ugyfelnek-fontos-kerdesek.md`. A technikai limitekről, címzettről, fájlformátumokról, elhelyezésről, árakról, címről, B2B/minimumról és a telefon elrejtéséről nem kérdezünk újra.
