@@ -27,7 +27,7 @@ Nyisd meg a `http://127.0.0.1:8080` címet. Ez kizárólag helyi előnézet, nem
 - Közös oldalsablonok: `scripts/build.py`; kezdőlapi szövegek és saját SVG-vázlat: `templates/home.html`.
 - Megjelenés: `assets/styles.css`; működés: `assets/app.js`.
 - A HTML és a böngészős termékadatok újragenerálása: `python3 scripts/build.py`.
-- Árak jelenleg `null` értékűek, a sablon szándékosan „Nettó ár: egyeztetés alatt” szöveget mutat. Az árlista érkezésekor a megjelenítés formátumát is véglegesíteni kell.
+- A `price` mező a termék nettó egységára forintban. A katalógus és a termékoldalak Ft / db formátumban mutatják, külön áfamegjegyzéssel. Az ügyfél mind a 15 termékhez megadta az árat 2026. október 8-án.
 
 ## Feltöltés Rackhost tárhelyre
 
@@ -54,7 +54,7 @@ A logó az ügyfél `.eml` csatolmányából származik; az eredeti is megmaradt
 - Soft Padded Jacket – `Black/Black`: a kért névhez nem volt közvetlenül hozzárendelhető beszállítói kép/színminta; látható helyőrző maradt. Más szín fényképével nem helyettesítettük.
 - Original Patch Beanie és Ultimate 5 Panel Cap: a beszállító „mérettáblázat” linkje részletes méretsor nélküli termékadatlap. A PDF elérhető, a méretadat hiányát az adatlap jelzi.
 - Jacket 501: a beszállító eredeti és új szabást is megad; ezt és a mindkettőt tartalmazó táblázatot megőriztük.
-- Hiányzik a nettó árlista, a pontos cím, az adatkezelési szöveg. A telefonszám bekérhető az űrlapon, de a cég publikus telefonszáma sehol nem jelenik meg.
+- Hiányzik a pontos cím, az adatkezelési szöveg. A telefonszám bekérhető az űrlapon, de a cég publikus telefonszáma sehol nem jelenik meg.
 - A bögre szolgáltatás szerepel, de konkrét bögreterméket nem találtunk ki.
 - Publikálás előtt a beszállítói tartalmak felhasználási jogosultsága, a tárhely és a nyitott ügyféladatok tisztázandók a követelménydokumentum szerint.
 
@@ -110,3 +110,11 @@ A build a `fonts.css`, `styles.css` és `responsive.css` fájlokból generálja 
 A `dist/` tartalmazza a `.htaccess` fájlt is: ezt a rejtett fájlt is töltsd fel. Apache alatt az elérhető modulokkal bekapcsolja a szöveges fájlok tömörítését és a statikus erőforrások gyorsítótárazását. HTML mindig újraellenőrzendő, CSS/JS tartalomhash alapján frissül; változatlan nevű képek legfeljebb egy napig maradhatnak cache-ben. A helyi Python-előnézet ezeket a szerverbeállításokat nem alkalmazza.
 
 Mérési eredmények és korlátok: `docs/qa/performance.md`. Újramérés: `node scripts/measure-performance.cjs` (Playwright és Chrome szükséges).
+
+## SEO és jogi oldalak – 2026. október 7.
+
+A megerősített domain **cegforma.hu** (a korábbi `cegfoma.hu` elírás). A SEO alapcíme a `config/site.json` fájlban van. A `scripts/seo.py` egyedi címeket/leírásokat, abszolút canonical URL-eket, Open Graph/Twitter megosztási metaadatokat és Organization, WebSite, WebPage/CollectionPage, BreadcrumbList, ItemList strukturált adatokat készít. Árat, készletet, értékelést nem találunk ki; Product rich-result jelölés még nincs. A sitemap a kezdőlapot, katalógust és 15 termékoldalt tartalmazza; query paraméterek a canonical címekből kimaradnak. A termékek főképe saját megosztási képük is.
+
+Az `adatkezeles.html`, `impresszum.html`, `sutik.html` és `ajanlatkeresi-feltetelek.html` forrásai a `templates/legal/` mappában szerkeszthetők. A jogi oldalak és ajánlatkérő `noindex,follow` jelölésűek. A tájékoztatók hiányzó adatai láthatóan jelöltek: **nem végleges jogi dokumentumok**. Az oldal kódja nem használ sütit, külső követőt vagy tartós böngészős tárolást, így nincs látszat-hozzájárulást kérő banner. Új követő bevezetésekor tényleges előzetes blokkolás, visszavonható választás és frissített tájékoztató szükséges.
+
+Továbbküldhető ügyfélkérdések, véglegesítési és indulási teendők: `docs/ugyfeltol-bekerendo-adatok.md`. Az eredeti követelménydokumentum történeti forrásként megmarad. A tárhely és Gmail tényleges adatkezelése külön ellenőrizendő. A csomagoló a négy jogi oldalt, robots.txt és sitemap.xml fájlokat is beleteszi a dist mappába. A `legal_approved` konfigurációs mező státuszjelzés, nem automatikus jogi ellenőrzés vagy publikálási engedély.

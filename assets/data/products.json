@@ -49,7 +49,7 @@
         "label": "Színkód: 69"
       }
     ],
-    "price": null,
+    "price": 1250,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/132---product_size.pdf",
     "sizeChart": "assets/size-charts/classic-new-132.pdf",
     "checkedAt": "2026-10-06",
@@ -112,7 +112,7 @@
         "label": "Színkód: 69"
       }
     ],
-    "price": null,
+    "price": 1650,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/129---product_size.pdf",
     "sizeChart": "assets/size-charts/basic-129.pdf",
     "checkedAt": "2026-10-06",
@@ -175,7 +175,7 @@
         "label": "Színkód: 69"
       }
     ],
-    "price": null,
+    "price": 1990,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/137---product_size.pdf",
     "sizeChart": "assets/size-charts/heavy-new-137.pdf",
     "checkedAt": "2026-10-06",
@@ -238,7 +238,7 @@
         "label": "Színkód: 44"
       }
     ],
-    "price": null,
+    "price": 1650,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/134---product_size.pdf",
     "sizeChart": "assets/size-charts/basic-134.pdf",
     "checkedAt": "2026-10-06",
@@ -310,7 +310,7 @@
         "label": "Színkód: 44"
       }
     ],
-    "price": null,
+    "price": 2510,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/128---product_size.pdf",
     "sizeChart": "assets/size-charts/dream-128.pdf",
     "checkedAt": "2026-10-06",
@@ -382,7 +382,7 @@
         "label": "Színkód: 69"
       }
     ],
-    "price": null,
+    "price": 2610,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/203---product_size.pdf",
     "sizeChart": "assets/size-charts/pique-polo-203.pdf",
     "checkedAt": "2026-10-06",
@@ -445,7 +445,7 @@
         "label": "Színkód: 44"
       }
     ],
-    "price": null,
+    "price": 2610,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/210---product_size.pdf",
     "sizeChart": "assets/size-charts/pique-polo-210.pdf",
     "checkedAt": "2026-10-06",
@@ -494,7 +494,7 @@
         "label": "Színkód: 69"
       }
     ],
-    "price": null,
+    "price": 4920,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/501---product_size.pdf",
     "sizeChart": "assets/size-charts/jacket-501.pdf",
     "checkedAt": "2026-10-06",
@@ -543,7 +543,7 @@
         "label": "Színkód: 25"
       }
     ],
-    "price": null,
+    "price": 950,
     "sizeChartSource": "https://shop.malfini.com/file/pdf/size_chart/307---product_size.pdf",
     "sizeChart": "assets/size-charts/5p-307.pdf",
     "checkedAt": "2026-10-06",
@@ -592,7 +592,7 @@
         "label": "Bright Royal/White"
       }
     ],
-    "price": null,
+    "price": 1110,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/303_69--B15c_sizespecs.pdf",
     "sizeChart": "assets/size-charts/ultimate-5-panel-cap-sandwich-peak.pdf",
     "checkedAt": "2026-10-06",
@@ -642,7 +642,7 @@
         "label": "Bottle Green"
       }
     ],
-    "price": null,
+    "price": 1090,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/319_69--B445_sizespecs.pdf",
     "sizeChart": "assets/size-charts/original-patch-beanie.pdf",
     "checkedAt": "2026-10-06",
@@ -685,7 +685,7 @@
         "label": "Navy/Royal"
       }
     ],
-    "price": null,
+    "price": 5990,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/828_33--R231M_sizespecs.pdf",
     "sizeChart": "assets/size-charts/printable-softshell-jacket.pdf",
     "checkedAt": "2026-10-06",
@@ -727,7 +727,7 @@
         "label": "Navy/Royal"
       }
     ],
-    "price": null,
+    "price": 5490,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/845_33--R232M_sizespecs.pdf",
     "sizeChart": "assets/size-charts/men-s-printable-softshell-bodywarmer.pdf",
     "checkedAt": "2026-10-06",
@@ -769,7 +769,7 @@
         "label": "Navy/Lime"
       }
     ],
-    "price": null,
+    "price": 7990,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/953_33--R239X_sizespecs.pdf",
     "sizeChart": "assets/size-charts/thermoquilt-gilet.pdf",
     "checkedAt": "2026-10-06",
@@ -808,7 +808,7 @@
         "label": "Navy/Lime"
       }
     ],
-    "price": null,
+    "price": 8990,
     "sizeChartSource": "https://www.falk-ross.eu/out/fr2015/src/pdf/872_33--R233M_sizespecs.pdf",
     "sizeChart": "assets/size-charts/soft-padded-jacket.pdf",
     "checkedAt": "2026-10-06",

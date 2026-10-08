@@ -183,6 +183,11 @@ body{font-size:15px;line-height:1.65}h1,h2,h3{font-weight:800;letter-spacing:-.0
 h1{overflow-wrap:anywhere}.section>h1{font-size:clamp(32px,5vw,64px);line-height:1.12}
 .card-sizes{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}.card-sizes span{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:5px;min-width:31px;height:29px;padding:0 6px;font-size:11px;color:#526275}.footer-top .pending{color:#7e5737}@media(min-width:601px){.apparel-hero{background-position:center top}}
 
+/* Confirmed net unit prices. */
+.price{font-size:15px;font-weight:700;color:var(--navy,#0b2435)}
+.product-price{font-size:22px;margin:18px 0 4px}
+.price-notice{font-size:14px;color:var(--navy,#0b2435);margin:0 0 20px}
+
 /* Stable image stage: intrinsic image sizes never participate in the grid sizing. */
 .collection-index { align-items: stretch; grid-template-columns: minmax(0, 1fr) minmax(0, 1.23fr); }
 .category-specimen {
@@ -409,3 +414,17 @@ h1{overflow-wrap:anywhere}.section>h1{font-size:clamp(32px,5vw,64px);line-height
   .quote-product-name { font-size: 17px; }
   .quote-selection { font-size: 12px; }
 }
+
+/* Readable legal pages, including long company identifiers on narrow screens. */
+.legal-page{max-width:900px;padding-top:64px;padding-bottom:80px;overflow-wrap:anywhere}
+.legal-page h1{font-size:clamp(2.3rem,6vw,4.5rem);line-height:1.08;margin-bottom:20px}
+.legal-page h2{font-size:clamp(1.5rem,3vw,2rem);margin:36px 0 14px;line-height:1.2}
+.legal-page p,.legal-page li,.legal-data{line-height:1.8}
+.legal-page p{margin-bottom:18px}.legal-page ol{padding-left:24px}
+.legal-page a{text-decoration:underline;text-underline-offset:3px}
+.legal-date{font-size:.9rem;color:#53616a}
+.legal-data{display:grid;grid-template-columns:minmax(160px,1fr) 2fr;margin:20px 0}
+.legal-data dt,.legal-data dd{margin:0;padding:14px 0;border-bottom:1px solid #dce2e6}
+.legal-data dt{font-weight:700;padding-right:20px}
+@media(max-width:600px){.legal-page{padding-top:36px;padding-bottom:48px}.legal-data{display:block}.legal-data dt{border:0;padding-bottom:0}.legal-data dd{padding-top:3px}}
+@media print{.site-header,footer,.skip{display:none}.legal-page{max-width:none;padding:0}.legal-page h2{break-after:avoid}.legal-page .notice{border:1px solid #777}}

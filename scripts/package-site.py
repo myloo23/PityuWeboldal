@@ -5,7 +5,7 @@ root=Path(__file__).resolve().parent.parent
 dest=root/'dist'
 if dest.exists():shutil.rmtree(dest)
 dest.mkdir()
-files=['.htaccess','assets/site.css','index.html','katalogus.html','ajanlatkeres.html','adatkezeles.html','assets/app.js','assets/styles.css','assets/responsive.css','assets/data/products.js','assets/images/cegforma-logo.webp','assets/images/apparel-hero-desktop.jpg','assets/images/apparel-hero-mobile.jpg']
+files=['sitemap.xml','robots.txt','impresszum.html','sutik.html','ajanlatkeresi-feltetelek.html','.htaccess','assets/site.css','index.html','katalogus.html','ajanlatkeres.html','adatkezeles.html','assets/app.js','assets/styles.css','assets/responsive.css','assets/data/products.js','assets/images/cegforma-logo.webp','assets/images/apparel-hero-desktop.jpg','assets/images/apparel-hero-mobile.jpg']
 files += ['assets/fonts.css'] + [str(p.relative_to(root)) for p in (root/'assets/fonts').iterdir() if p.is_file()]
 files += [str(p.relative_to(root)) for folder in ['assets/data','assets/swatches'] for p in (root/folder).glob('*.js' if folder.endswith('data') else '*.png')]
 for p in json.loads((root/'assets/data/products.json').read_text()):
