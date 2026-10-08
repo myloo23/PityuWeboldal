@@ -127,3 +127,7 @@ Továbbküldhető ügyfélkérdések, véglegesítési és indulási teendők: `
 - A termékoldali színválasztás frissíti a megosztható címet. Hiányzó vagy ismeretlen színparaméternél a sablon alapértelmezett, fotóval rendelkező színe marad érvényes.
 - Az ajánlatkérő összesítője UTF-8 szövegfájlként is letölthető. Módosításkor a korábbi összesítő tartalma törlődik, újat kell készíteni. A letöltés nem küld e-mailt, nem ment böngészős adattárba; a működés leírása a tájékoztatókban is frissült.
 - Célzott ellenőrzés: `scripts/check-usability.cjs` (Playwright és Chrome). Lefedés: keresés, előzmények, visszaállítás, szín megőrzése, hibás mező javítása, minimum mennyiség, letöltött fájl pontos tartalma, összesítő érvénytelenítése és mobilos elrendezés.
+
+## Jogi tervezetek frissítése – 2026. október 8.
+
+A korábbi hiánylistát felülírva bekerültek az ügyfél által megadott cégadatok, a székhely/üzlet/átvétel címe, a kizárólagos B2B értékesítés és a Gmailes grafikatárolás. A leveleket Balogh István kezeli; külső gyártónak nem továbbítja. A telefonszám a korábbi kérés szerint nem publikus. Az adatkezelési tájékoztató külön jelöli a 6 hónapos és kétéves megőrzési javaslatot, valamint a tervezett törlést. A jogi oldalak továbbra is tervezetek, a szolgáltatói részletek és szerződéskötés véglegesítése nyitott. Aktuális állapot: `docs/ugyfeltol-bekerendo-adatok.md`. A jelenlegi űrlap továbbra is helyi összesítő.

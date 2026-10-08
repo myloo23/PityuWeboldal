@@ -1,58 +1,43 @@
-# Cégforma – rövidített ügyfélkérdések és belső teendők
+# Cégforma – rögzített válaszok és véglegesítési teendők
 
-Felülvizsgálva: 2026. október 8. Az eredeti 12 e-mail, a csatolt szórólap, a rögzített követelmények és a beszélgetés alapján. Belső dokumentum; nem kerül a publikus csomagba.
+Frissítve: 2026. október 8. Az ügyfél jogi tárgyú levele és a Gmailes tárolásról szóló későbbi pontosítás alapján. Belső dokumentum; nem kerül a publikus csomagba.
 
-## Ezt érdemes most továbbküldeni
+## Megválaszolt kérdések – nem kérjük be újra
 
-> Szia! A jogi tájékoztatók véglegesítéséhez még ezek hiányoznak:
->
-> 1. Kérlek, küldd el a vállalkozás hivatalos nevét, székhelyét, adószámát és cégjegyzék-/egyéni vállalkozói nyilvántartási számát. A szórólapon szereplő Dabas, Andrássy utca 2. székhely, üzlet vagy átvételi pont? Mi a teljes, irányítószámos cím?
-> 2. Kizárólag vállalkozások rendelhetnek, vagy magánszemélyeket is kiszolgáltok?
-> 3. A cegforma@gmail.com-ra érkező ajánlatkéréseket ki kezeli? Továbbítjátok-e másnak a leveleket vagy grafikákat, illetve mentitek-e más rendszerbe?
-> 4. Van már adatkezelési tájékoztatótok, ÁSZF-etek vagy használt megrendelési mintátok? Ha igen, kérlek, küldd el. Meddig tartjátok meg a meg nem rendelt ajánlatok leveleit és grafikáit? Ha erre még nincs szabály, azt is elég jelezni: közösen kell kialakítani egy betartható megőrzési és törlési rendet.
+- Üzemeltető: Balogh Horgászbolt Kft., az etetoanyag.hu üzemeltetője is.
+- Székhely, üzlet és személyes átvétel: 2370 Dabas, Andrássy utca 2.
+- Adószám: 27930852-2-13. Cégjegyzékszám: 13-09-205494.
+- Nyilvántartó bíróság az ügyfél közlése szerint: Budapest Környéki Törvényszék. A cégadatok nyilvántartási ellenőrzése még hátravan.
+- Kapcsolattartó: Balogh István. E-mail: cegforma@gmail.com.
+- Megadott telefon: +36 30 680 9674. A korábbi kifejezett ügyfélkérés szerint nem jelenítjük meg a weboldalon; a jogi kapcsolati adatok véglegesítésekor ezt a korábbi kérést figyelembe kell venni.
+- Kizárólag vállalkozások rendelhetnek, összesen minimum 5 darabtól, akár többféle termékből.
+- Az ajánlatkérés önmagában nem jelent megrendelést.
+- A leveleket és grafikákat a vállalkozáson belül kizárólag Balogh István kezeli. Más vállalkozásnak vagy külső gyártónak nem továbbítja őket.
+- A korábban saját belső adatbázisként említett tárolás az ügyfél pontosítása szerint a Gmailt jelenti, levelek és mellékletek formájában. Külön adatbázist nem állítunk. A szolgáltatói másolatok és technikai hozzáférések nem azonosak az üzleti továbbítással.
+- A felhasználó kérésére nem kérdezünk vissza arra, hogy István képes-e törölni a leveleket. A szükséges törlést a kialakítandó eljárásban rögzítjük; tényleges törlés végrehajtását nem igazoltuk.
+- Domain: cegforma.hu. Választott tárhely: Rackhost. A 15 termék nettó árai már megérkeztek és bekerültek.
 
-Nem kell az ügyféllel jogalapot választatni, jogszabályt keresni vagy technikai naplózást elemeztetni. A működéséről kérünk tényeket; a dokumentumokat ezek alapján kell elkészíteni.
+## Megőrzés – továbbra is egyeztetési javaslat
 
-## Amit már tudunk – nem kérdezzük meg újra
+- Megrendeléssé nem váló ajánlatkérés és mellékletei: az egyeztetés lezárásától 6 hónap, konkrét jogvita esetén indokolt, célhoz kötött további megőrzéssel.
+- Utánrendeléshez őrzött grafika: legfeljebb 2 év; személyes adat esetén külön, önkéntes, visszavonható érintetti hozzájárulás lehet a jogalap. Ez nem rendelési feltétel. Harmadik személy adataira nem elegendő automatikusan a megrendelő cég hozzájárulása.
+- A két időtartam nem már bevezetett szabály. Véglegesítendő a kezdőpont, a válasz nélkül maradó egyeztetés lezárása, a jogalap, az érdekmérlegelés, a hozzájárulás bizonyíthatósága és a törlés rendje.
+- A tervezett törlés a Gmail-levelekre és mellékleteikre, a Kukára és az esetleges további példányokra is kiterjed. A szolgáltatói biztonsági másolatok tényleges törléséről nem állítunk ellenőrizetlen határidőt.
+- Teljesült megrendelések, számviteli iratok és jogi igények: külön szabály szükséges; nem alkalmazzuk automatikusan a 6 hónapot vagy 2 évet.
 
-| Téma | Meglévő válasz és forrás |
-|---|---|
-| Domain | **cegforma.hu** – felhasználói megerősítés és szórólap. |
-| Tárhely | **Rackhost** – felhasználó megerősítette. A csomag/beállítás technikai ellenőrzési feladat. |
-| Kapcsolati cím | **cegforma@gmail.com** – szórólap és projektkövetelmény. |
-| Weboldal jellege | Bemutatkozó és ajánlatkérő oldal; nincs kosár és online fizetés – rögzített projektkövetelmény. |
-| Ajánlatkérés joghatása | Nem végleges megrendelés – az eredeti „Árajánlatkérő űrlap kialakítása” levél kifejezetten leírja. |
-| Ajánlatkérés célja | Kitöltött adatok e-mailes továbbítása – már kért funkció. A jelenlegi megvalósítás ettől eltérően még csak helyi összesítő. |
-| Minimum | Összesen 5 darab – levelek és későbbi pontosítás. |
-| Árak | A kérdéslista korábbi frissítése szerint a 15 termék nettó árlistája október 8-án megérkezett és bekerült az oldalba; nem kérjük újra. |
-| Fájlfeltöltés | Az eredeti levél kéri: több fájl, előre/hátra jelölés, példaként JPG, PNG, PDF, SVG. A későbbi projektjegyzet a megvalósítás terjedelmét még nyitottnak jelöli. Emiatt nem úgy kérdezünk rá, mintha soha nem lett volna igény. |
-| Célközönség | Vállalkozások; a kizárólagos B2B értékesítést viszont egyik levél sem erősíti meg. |
-| Cím | A szórólapon: Balogh Horgászbolt, Dabas, Andrássy utca 2. Nem bizonyított, hogy ez a jogi székhely; a későbbi projektjegyzet a pontos címet függőben hagyta. Nem publikáljuk automatikusan székhelyként. |
-| Telefonszám | Az ügyfél kifejezetten kérte, hogy ne jelenjen meg. |
-| Képek és termékadatok | Az ügyfél megadta a forrásokat és kérte az átvételt. Ez nem azonos a beszállítói felhasználási jogosultság igazolásával. |
+## Fejlesztői és jogi véglegesítési feladatok
 
-## Amit mi intézünk vagy ellenőrzünk
+- A jelenlegi űrlap helyi összesítő: nincs hálózati beküldés, fájlfeltöltés vagy weboldali adatbázis. A kért e-mailes beküldés és többfájlos feltöltés még megvalósítandó; nem elhagyott igény. E funkciók szolgáltatóit, adatútját, ideiglenes tárolását, hozzáféréseit és törlését a megvalósítással együtt kell meghatározni.
+- Rackhost szerződő adatai, éles naplózás, megőrzés, HTTPS és esetleges szerveroldali sütik ellenőrzendők.
+- Gmail szerződő szolgáltatója, alkalmazandó feltételei, adatvédelmi szerepei és nemzetközi adattovábbításai ellenőrzendők. Az üzleti ügyintéző személye már ismert.
+- Az etetoanyag.hu régi szolgáltatóit és 5 éves érdeklődői megőrzését nem másoljuk át. A két kapott hivatkozás: https://etetoanyag.hu/shop_help.php?tab=privacy_policy és https://etetoanyag.hu/shop_help.php?tab=terms . Az utóbbi lekérésekor sem állt rendelkezésre külön ellenőrzött ÁSZF-szöveg.
+- Véglegesítendő az egyedi ajánlat érvényessége, elfogadása, a szerződés létrejötte, a visszaigazolás szerepe, a grafikai jóváhagyás, a gyártás indítása, fizetés, teljesítés, módosítás és lemondás. A tervezet nem állít önkényesen elfogadott üzleti folyamatot.
+- A kód jelenleg nem használ sütit, analitikát vagy tartós böngészős tárolót. Az éles tárhelyet külön ellenőrizni kell.
+- A beszállítói tartalmak felhasználási jogosultságának ellenőrzése továbbra is nyitott.
 
-- Rackhost szerződő szolgáltatói adatai, adatfeldolgozási feltételei, éles naplózás, megőrzés, HTTPS és esetleges szerveroldali sütik. Nyilvános adatokból és a tényleges csomagból ellenőrizendő; csak a nem hozzáférhető szerződés/csomag azonosításához kérünk segítséget.
-- A Gmail szolgáltatói feltételei és szerepei. A „sima vagy üzleti Gmail?” kérdés önmagában nem oldja meg az adatvédelmet; az ügyfélnek a tényleges hozzáférést, továbbítást és másolatokat kell elmondania.
-- A vállalkozás megadott azonosítói alapján a nyilvántartó és a nyilvános adatok ellenőrzése. Külön engedély/szakmai nyilvántartás csak akkor kérendő, ha a konkrét tevékenység miatt releváns.
-- Adatkezelési cél, jogalap, megőrzés, szolgáltatói szerepek és érintetti jogok véglegesítése. Jogos érdeknél a szükséges érdekmérlegelés elkészítése; nem elég ezt a szót a tájékoztatóba írni.
-- A már kért fájlfeltöltéshez biztonságos műszaki javaslat: engedélyezett formátumok, darab-/méretkorlát, tárolás, hozzáférés és törlés. A meglévő SVG-igényt biztonsági szempontból külön meg kell oldani. Ha az induló verzióból kimaradna, az scope-változás, amelyet egyeztetni kell.
-- Beszállítói képfelhasználási feltételek ellenőrzése; csak a partneri szerződésből kiderülő jogosultságot kérjük az ügyféltől, ha nyilvánosan nem tisztázható.
+## Dokumentumok státusza
 
-## Mi halasztható, illetve mi hagyható el?
-
-- Marketingeszközökre, hírlevélre, analitikára és beágyazott térképre most nem kell kérdéssort küldeni. Nincsenek az induló megvalósításban. Bevezetésük előtt kell rendezni a hozzájuk kapcsolódó adatkezelést.
-- Sütimentes működéshez nem kell elfogadóbanner vagy fizetős hozzájárulás-kezelő. Az éles tárhelyet is ellenőrizni kell. A sütikről szóló rövid információ beépíthető az adatkezelési tájékoztatóba; nem a külön oldal darabszáma a követelmény.
-- A fizetés, előleg, szállítás, grafikai jóváhagyás, lemondás és hibás teljesítés részletes kérdéssora külön értékesítési egyeztetésbe tehető. A puszta ajánlatkérő kialakításához nem kell mindet most megválaszolni. A tényleges értékesítés és e-mailes szerződéskötés kötelezettségei ettől nem tűnnek el.
-- A teljes webshop-ÁSZF nem következik automatikusan abból, hogy van bemutatkozó oldal és ajánlatkérő. A tényleges szerződéskötési folyamat alapján kell eldönteni, milyen feltételek és előzetes tájékoztatások szükségesek. Magánszemély vásárlóknál a fogyasztói szabályokat külön rendezni kell.
-- Ne kérjünk automatikusan általános „GDPR-hozzájárulást” az ajánlatkéréshez. A valós cél és megfelelő jogalap határozza meg a követelményeket; tájékoztatás ettől még szükséges.
-
-## A jogi szövegek jelenlegi státusza
-
-**A jelenlegi oldalak tervezetek, nem végleges jogi megfelelőségi igazolások.** Hiányzik az adatkezelő teljes azonosítása, a megőrzés és több szolgáltatói részlet. A honlap szövegének és a tényleges működésnek egyeznie kell. A valós e-mailes beküldés/fájlfeltöltés bekötésekor a helyi összesítőről szóló részeket át kell írni.
-
-A válaszok alapján az üzemeltető által ellenőrzött, konkrét dokumentumok készíthetők. Százszázalékos jogi garanciát sem egy kitöltött sablon, sem önmagában a szöveg nem ad. A végleges adatkezelés és szerződéskötés jogi átnézése indokolt; a napi működés, hozzáférések és törlések betartása az üzemeltető feladata.
+A jogi oldalak frissített tervezetek. Az ismert tények bekerültek, a fennmaradó javaslatok és ellenőrzési feladatok jelöltek. A config/site.json legal_approved értéke továbbra is false. Nem tettük közzé a weboldalt.
 
 ## SEO induláskor
 
