@@ -1,6 +1,12 @@
 # Cégforma – rögzített válaszok és véglegesítési teendők
 
-Frissítve: 2026. október 8. Az ügyfél jogi tárgyú levele és a Gmailes tárolásról szóló későbbi pontosítás alapján. Belső dokumentum; nem kerül a publikus csomagba.
+Frissítve: 2026. október 9. Az ügyfél jogi tárgyú levele és a Gmailes tárolásról szóló későbbi pontosítás alapján. Belső dokumentum; nem kerül a publikus csomagba.
+
+## Telefonos pontosítás – 2026. október 9.
+
+- A Rackhostot Pityu kezeli; a felhasználónál már megvannak a belépési adatok. A tényleges hozzáférést és a csomag képességeit még nem ellenőriztük.
+- Az oldal bemutatkozó és termékkatalógus oldal, főleg a meglévő helyi ügyfeleknek. Az ajánlatkérő és a grafikacsatolás megmarad. Az üzletkötés részleteit Pityu közvetlenül egyezteti; weboldali fizetési, kiszállítási és rendelési folyamat nem feladat.
+- A rendelési/kiszállítási kérdéssort töröltük. A korábbi megőrzési kérdést sem tesszük fel újra; a javasolt időtartamok nem váltak ettől jóváhagyott szabállyá.
 
 ## Megválaszolt kérdések – nem kérjük be újra
 
@@ -31,7 +37,7 @@ Frissítve: 2026. október 8. Az ügyfél jogi tárgyú levele és a Gmailes tá
 - Rackhost szerződő adatai, éles naplózás, megőrzés, HTTPS és esetleges szerveroldali sütik ellenőrzendők.
 - Gmail szerződő szolgáltatója, alkalmazandó feltételei, adatvédelmi szerepei és nemzetközi adattovábbításai ellenőrzendők. Az üzleti ügyintéző személye már ismert.
 - Az etetoanyag.hu régi szolgáltatóit és 5 éves érdeklődői megőrzését nem másoljuk át. A két kapott hivatkozás: https://etetoanyag.hu/shop_help.php?tab=privacy_policy és https://etetoanyag.hu/shop_help.php?tab=terms . Az utóbbi lekérésekor sem állt rendelkezésre külön ellenőrzött ÁSZF-szöveg.
-- Véglegesítendő az egyedi ajánlat érvényessége, elfogadása, a szerződés létrejötte, a visszaigazolás szerepe, a grafikai jóváhagyás, a gyártás indítása, fizetés, teljesítés, módosítás és lemondás. A tervezet nem állít önkényesen elfogadott üzleti folyamatot.
+- A weboldal bemutatkozást, katalógust és kapcsolatfelvételt szolgál. A rendelés részleteit közvetlenül egyeztetik; ezek kidolgozása nem weboldal-fejlesztési vagy ügyfélkérdezési feladat. A tájékoztató az ajánlatkérés tényleges működésére szorítkozik.
 - A kód jelenleg nem használ sütit, analitikát vagy tartós böngészős tárolót. Az éles tárhelyet külön ellenőrizni kell.
 - A beszállítói tartalmak felhasználási jogosultságának ellenőrzése továbbra is nyitott.
 

@@ -1,6 +1,6 @@
 # Cégforma – egyedi textilmintakönyv-arculat
 
-Egyszerű, adatbázis nélküli HTML/CSS/JavaScript weboldal. A tárhelyen nem kell Node.js, Python vagy buildfolyamat. Nincs kosár, fizetés, fiók, admin vagy fájlfeltöltés.
+Egyszerű, adatbázis nélküli HTML/CSS/JavaScript weboldal. A tárhelyen nem kell Node.js, Python vagy buildfolyamat. Nincs kosár, fizetés, fiók vagy admin. Az ajánlatkérő grafikacsatolást is kezel; az online továbbítás külön aktiválható.
 
 ## Oldalszerkezet
 
@@ -141,3 +141,7 @@ A korábbi hiánylistát felülírva bekerültek az ügyfél által megadott cé
 PHP 8.2+, fileinfo, mbstring, DOM/libxml és OpenSSL szükséges. A PHPMailer 7.1.1 forrásai és LGPL-licence a `server/vendor/phpmailer/` mappában szerepelnek, verzióval és SHA-256 jegyzékkel. Nincs szükség Composerre a tárhelyen. Forrás: https://github.com/PHPMailer/PHPMailer/tree/v7.1.1 . A könyvtár biztonsági frissítéseit az üzemeltetés részeként követni kell.
 
 Teszt: `python3 scripts/check-delivery.py` (PHP, Node, Playwright, Chrome); kizárólag helyi SMTP-t használ. Általános regresszió: `node scripts/check-all.cjs`, a projektet kiszolgáló 8080-as előnézet mellett. Indulási ellenőrzés: `python3 scripts/check-release.py`; a hiányzó jogi jóváhagyás és az inaktív küldés miatt jelenleg szándékosan hibával áll meg.
+
+## Átadás előtti felületellenőrzés – 2026. október 11.
+
+Az ajánlatkérő új, billentyűzettel és fájlbehúzással is használható grafikaválasztót kapott, fájlszám- és méretjelzéssel. Teljes ellenőrzési jegyzet és fennmaradó élesítési feltételek: [docs/qa/atadas-ellenorzes-2026-10-11.md](docs/qa/atadas-ellenorzes-2026-10-11.md). A további felületi/feltöltési teszt a `scripts/check-handover.cjs` fájlban futtatható.

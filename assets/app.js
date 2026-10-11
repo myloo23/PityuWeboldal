@@ -147,6 +147,8 @@
     const sendButton = $('#send-quote'), sendStatus = $('#send-status');
     function renderArtwork() {
       const list = $('#artwork-list'); list.replaceChildren();
+      const total = artwork.reduce((sum, item) => sum + item.file.size, 0);
+      $('#artwork-status').textContent = artwork.length ? `${artwork.length} / 5 fájl csatolva · ${(total / 1024 / 1024).toFixed(2)} / 10 MB` : 'Még nincs csatolt fájl · Nem kötelező';
       artwork.forEach((item, index) => {
         const row = document.createElement('div'); row.className = 'artwork-row';
         const label = document.createElement('label'); label.className = 'field';
@@ -158,12 +160,12 @@
         label.append(select);
         const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'button outline small';
         remove.textContent = 'Eltávolítás'; remove.setAttribute('aria-label', item.file.name + ' eltávolítása');
-        remove.addEventListener('click', () => { artwork.splice(index, 1); renderArtwork(); invalidatePreview(); $('#artwork').focus(); });
+        remove.addEventListener('click', () => { artwork.splice(index, 1); renderArtwork(); $('#artwork-error').textContent = ''; invalidatePreview(); $('#artwork').focus(); });
         row.append(label, remove); list.append(row);
       });
     }
-    $('#artwork').addEventListener('change', event => {
-      const files = [...event.target.files];
+    function addArtwork(files) {
+      if (sending || !files.length) return;
       const all = [...artwork.map(item => item.file), ...files];
       let error = '';
       if (all.length > 5) error = 'Legfeljebb 5 fájl csatolható.';
@@ -172,7 +174,21 @@
       else if (all.reduce((sum, file) => sum + file.size, 0) > 10 * 1024 * 1024) error = 'Összesen legfeljebb 10 MB csatolható.';
       $('#artwork-error').textContent = error;
       if (!error) { artwork.push(...files.map(file => ({ file, side: 'Egyeztetendő' }))); renderArtwork(); }
-      event.target.value = ''; invalidatePreview();
+      if (!error) invalidatePreview();
+    }
+    $('#artwork').addEventListener('change', event => {
+      addArtwork([...event.target.files]); event.target.value = '';
+    });
+    const dropzone = $('#artwork-dropzone');
+    ['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => {
+      event.preventDefault(); if (!sending) dropzone.classList.add('is-dragging');
+    }));
+    dropzone.addEventListener('dragleave', event => {
+      if (!dropzone.contains(event.relatedTarget)) dropzone.classList.remove('is-dragging');
+    });
+    dropzone.addEventListener('drop', event => {
+      event.preventDefault(); dropzone.classList.remove('is-dragging');
+      addArtwork([...event.dataTransfer.files]);
     });
     function option(text, value = text) { const o = document.createElement('option'); o.textContent = text; o.value = value; return o; }
     function invalidatePreview() { $('#quote-preview').hidden = true; $('#preview-text').value = ''; $('#copy-status').textContent = ''; pendingDelivery = null; delivered = false; sendStatus.textContent = ''; sendButton.disabled = false; }

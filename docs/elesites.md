@@ -4,6 +4,8 @@
 
 A kód elkészült, az online küldés kikapcsolva. A jogi oldalak tervezetek. Nincs valódi SMTP-hozzáférés, éles kézbesítési teszt vagy tárhely-ellenőrzés. A helyi teszt SMTP-szimulátorba küld, az ügyfél postafiókját nem éri el.
 
+A 2026. október 9-i pontosítás szerint a Rackhost-belépési adatok már megvannak a felhasználónál. Az oldal bemutatkozó katalógus és ajánlatkérő; weboldali rendelési, fizetési vagy kiszállítási folyamat nem része az élesítésnek.
+
 ## Tárhely
 
 - PHP 8.2+; fileinfo, mbstring, DOM/libxml, OpenSSL. Az SMTP-szolgáltatóhoz kimenő kapcsolat szükséges.
@@ -31,7 +33,7 @@ A kód elkészült, az online küldés kikapcsolva. A jogi oldalak tervezetek. N
 
 ## Aktiválás és átadási próba
 
-1. Ügyfél üzleti döntései, szolgáltatói ellenőrzések, végleges jogi szövegek; majd `legal_approved=true`. A státuszjelző önmagában nem véglegesíti a tartalmat.
+1. A bemutatkozó oldal és az ajánlatkérő tényleges működéséhez igazított tájékoztatók, szolgáltatói ellenőrzések; majd `legal_approved=true`. A státuszjelző önmagában nem véglegesíti a tartalmat.
 2. Privát SMTP-konfiguráció `enabled=true`, publikus `config/site.json` fájlban `quote_enabled=true`; build és csomagolás. A megjelenő működésleírások a buildkapcsolót követik.
 3. `python3 scripts/check-release.py`. A helyi ellenőrzés nem ellenőrzi az éles hitelesítő adatokat, DNS-t vagy kézbesítést.
 4. HTTP/www átirányítás, érvényes TLS, biztonsági fejlécek, tömörítés, cache, 404, `server/catalog.json` elérésére 403/404, privát konfiguráció nyilvános elérhetetlensége. JavaScript/képek működése CSP mellett.
